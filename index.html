@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TQ Vanessa</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="intro" class="intro">
+    <h1 class="click-text">Click to Enter</h1>
+  </div>
+
+  <div id="main" class="hidden stars">
+    <div class="mensaje-central">TQ Vanessa</div>
+
+    <div class="volume-container">
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+    </div>
+
+    <div class="photos">
+      <img src="foto1.jpg" class="foto" />
+      <img src="foto2.jpg" class="foto" />
+      <img src="foto3.jpg" class="foto" />
+      <img src="foto4.jpg" class="foto" />
+      <img src="foto5.jpg" class="foto" />
+      <img src="foto6.jpg" class="foto" />
+      <img src="foto7.jpg" class="foto" />
+      <img src="foto8.jpg" class="foto" />
+      <img src="foto9.jpg" class="foto" />
+      <img src="foto10.jpg" class="foto" />
+    </div>
+
+    <canvas id="corazones"></canvas>
+    <audio id="music" src="musica.mp3" loop></audio>
+  </div>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const main = document.getElementById("main");
+    const music = document.getElementById("music");
+    const volume = document.getElementById("volume");
+
+    intro.addEventListener("click", () => {
+      intro.style.display = "none";
+      main.classList.remove("hidden");
+      music.volume = volume.value;
+      music.play();
+    });
+
+    volume.addEventListener("input", () => {
+      music.volume = volume.value;
+    });
+
+    // corazones
+    const canvas = document.getElementById("corazones");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const corazones = [];
+    for (let i = 0; i < 60; i++) {
+      corazones.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 10 + 5,
+        speed: Math.random() * 1.5 + 0.5,
+      });
+    }
+
+    function drawCorazones() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "pink";
+      corazones.forEach((c) => {
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+        ctx.arc(c.x - c.size / 2, c.y, c.size / 2, 0, Math.PI * 2);
+        ctx.arc(c.x + c.size / 2, c.y, c.size / 2, 0, Math.PI * 2);
+        ctx.lineTo(c.x, c.y + c.size);
+        ctx.fill();
+        c.y += c.speed;
+        if (c.y > canvas.height) c.y = 0;
+      });
+      requestAnimationFrame(drawCorazones);
+    }
+    drawCorazones();
+
+    // Movimiento suave de fotos
+    const fotos = document.querySelectorAll(".foto");
+    fotos.forEach(foto => {
+      const move = () => {
+        foto.style.transition = 'top 6s ease-in-out, left 6s ease-in-out, transform 6s ease-in-out';
+        foto.style.top = Math.random() * 90 + "%";
+        foto.style.left = Math.random() * 90 + "%";
+        foto.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+      };
+      setInterval(move, 7000);
+      move();
+    });
+  </script>
+</body>
+</html>
