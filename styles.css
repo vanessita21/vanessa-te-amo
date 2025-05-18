@@ -1,0 +1,121 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+.intro {
+  background: linear-gradient(to bottom right, #ffafcc, #ffc8dd);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.click-text {
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 0 10px #ff69b4;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff69b4;
+  }
+  to {
+    text-shadow: 0 0 20px #fff;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.stars {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.photos {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  position: absolute;
+  border: 2px solid transparent;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.foto:hover {
+  border: 2px solid #ff69b4;
+  box-shadow: 0 0 10px #ff69b4;
+}
+
+canvas#corazones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mensaje-central {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: #ff69b4;
+  font-weight: bold;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  text-shadow: 0 0 10px #ff9ecb, 0 0 20px #ffcce6, 0 0 30px #ff69b4;
+  z-index: 10;
+  animation: aparecer 2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+  }
+}
+
+.volume-container {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+}
+
+.volume-container input[type="range"] {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 5px;
+  background: #ffb6d5;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.volume-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ff69b4;
+  border-radius: 50%;
+  box-shadow: 0 0 5px white;
+}
